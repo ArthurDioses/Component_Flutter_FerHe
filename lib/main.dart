@@ -1,6 +1,5 @@
 import 'package:component_flutter_ferhe/src/pages/alert_page.dart';
-import 'package:component_flutter_ferhe/src/pages/avatar_page.dart';
-import 'package:component_flutter_ferhe/src/pages/home_page.dart';
+import 'package:component_flutter_ferhe/src/routes/routes.dart';
 //import 'package:component_flutter_ferhe/src/pages/home_page_temp.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +12,10 @@ class MyApp extends StatelessWidget {
       title: 'Componentes App',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => HomePage(),
-        'alert': (BuildContext context) => AlertPage(),
-        'avatar': (BuildContext context) => AvatarPage(),
+      routes: getApplicationRoutes(),
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+            builder: (BuildContext context) => AlertPage());
       },
       //home: HomePage(),
       //home: HomePageTemp(),
