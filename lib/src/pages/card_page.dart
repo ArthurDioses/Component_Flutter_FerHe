@@ -9,7 +9,13 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
-        children: <Widget>[_cardTipo1()],
+        children: <Widget>[
+          _cardTipo1(),
+          SizedBox(
+            height: 30,
+          ),
+          _cardTipo2()
+        ],
       ),
     );
   }
@@ -31,6 +37,32 @@ class CardPage extends StatelessWidget {
               FlatButton(child: Text('Ok'), onPressed: () {})
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _cardTipo2() {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          FadeInImage(
+            image: NetworkImage(
+                'https://cdnb.artstation.com/p/assets/images/images/018/332/749/large/george-britton-infinitywarlongpostercc.jpg?1558989465'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            fadeInDuration: Duration(milliseconds: 200),
+            height: 250.0,
+            fit: BoxFit.cover,
+          ),
+
+          /*
+          Image(
+            image: NetworkImage(
+                'https://cdnb.artstation.com/p/assets/images/images/018/332/749/large/george-britton-infinitywarlongpostercc.jpg?1558989465'),
+          ),
+          */
+          Container(
+              padding: EdgeInsets.all(10.0), child: Text('No se qué poner'))
         ],
       ),
     );
