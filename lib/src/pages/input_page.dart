@@ -9,6 +9,10 @@ class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _email = '';
   String _fecha = '';
+  String _opcionSeleccionada = 'Volar';
+
+  List<String> _poderes = ['Volar', 'Rayos X', 'Super aliento', 'Super fuerza'];
+
   TextEditingController _inputFieldDateController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropdown(),
           Divider(),
           _crearPersona(),
         ],
@@ -103,13 +109,6 @@ class _InputPageState extends State<InputPage> {
         });
   }
 
-  Widget _crearPersona() {
-    return ListTile(
-      title: Text('Nombre es: $_nombre'),
-      subtitle: Text('Email: $_email'),
-    );
-  }
-
   _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
         context: context,
@@ -123,5 +122,41 @@ class _InputPageState extends State<InputPage> {
         _inputFieldDateController.text = _fecha;
       });
     }
+  }
+
+  List<DropdownMenuItem<String>> getOpcionesDropDown() {
+    List<DropdownMenuItem<String>> lista = [];
+    _poderes.forEach((poder) {
+      lista.add(DropdownMenuItem(child: Text(poder), value: poder));
+    });
+    return lista;
+  }
+
+  Widget _crearDropdown() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(width: 30.0),
+        Expanded(
+          child: DropdownButton(
+            value: _opcionSeleccionada,
+            items: getOpcionesDropDown(),
+            onChanged: (opt) {
+              setState(() {
+                _opcionSeleccionada = opt.toString();
+              });
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _crearPersona() {
+    return ListTile(
+      title: Text('Nombre es: $_nombre'),
+      subtitle: Text('Email: $_email'),
+      trailing: Text(_opcionSeleccionada),
+    );
   }
 }
